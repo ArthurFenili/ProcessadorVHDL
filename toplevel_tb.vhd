@@ -17,7 +17,8 @@ architecture a_toplevel_tb of toplevel_tb is
             mux1_selection : in std_logic;
             br_readReg1 : in unsigned(2 downto 0);
             br_readReg2 : in unsigned(2 downto 0);
-            br_writeReg : in unsigned(2 downto 0)
+            br_writeReg : in unsigned(2 downto 0);
+            rom_o : out unsigned(15 downto 0)
         );
     end component;
 
@@ -33,6 +34,7 @@ architecture a_toplevel_tb of toplevel_tb is
     signal br_readReg1_s            : unsigned(2 downto 0);
     signal br_readReg2_s            : unsigned(2 downto 0);
     signal br_writeReg_s            : unsigned(2 downto 0);
+    signal rom_o_s                  : unsigned(15 downto 0);
 
     ---------------------------------------------------------
 
@@ -47,7 +49,8 @@ begin
         mux1_selection => mux1_selection_s,
         br_readReg1 => br_readReg1_s,
         br_readReg2 => br_readReg2_s,
-        br_writeReg => br_writeReg_s
+        br_writeReg => br_writeReg_s,
+        rom_o => rom_o_s
     );
 
     ---------------------------------------------------------

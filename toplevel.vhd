@@ -13,7 +13,8 @@ entity toplevel is
         mux1_selection : in std_logic;
         br_readReg1 : in unsigned(2 downto 0);
         br_readReg2 : in unsigned(2 downto 0);
-        br_writeReg : in unsigned(2 downto 0)
+        br_writeReg : in unsigned(2 downto 0);
+        rom_o : out unsigned(15 downto 0);
     );
 end entity;
 
@@ -49,6 +50,23 @@ architecture a_toplevel of toplevel is
             saida : out unsigned (15 downto 0)
         );
     end component;
+
+    component ROM is
+        port( 
+            clk : in std_logic;
+            endereco : in unsigned(6 downto 0);
+            dado : out unsigned(15 downto 0)
+        );
+    end component;
+
+    component PCUC is
+        port (
+            clk : in std_logic;
+            rst : in std_logic;
+            wr_en : in std_logic;
+            d_out : out unsigned(6 downto 0)
+        );
+    end component;
     ---------------------------------------------------------
 
     ---------------------------------------------------------
@@ -57,6 +75,7 @@ architecture a_toplevel of toplevel is
     signal br_to_mux : unsigned(15 downto 0);
     signal mux_to_ula : unsigned(15 downto 0);
     signal ula_to_br : unsigned(15 downto 0);
+    signal pcuc_to_rom : unsigned(6 downto 0);
     ---------------------------------------------------------
 
 begin
@@ -86,6 +105,19 @@ begin
         entr0 => br_to_mux,
         entr1 => constant_mux1_i,
         saida => mux_to_ula 
+    );
+
+    rom1: ROM port map (
+        clk => clk,
+        endereco => pcuc_to_rom,
+        dado => rom_o
+    );
+
+    pcuc1: PCUC port map (
+        clk => clk,
+        rst => rst,
+        wr_en => wr_en, 
+        d_out => pcuc_to_rom
     );
     ---------------------------------------------------------
 
