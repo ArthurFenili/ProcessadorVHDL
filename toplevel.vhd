@@ -66,7 +66,9 @@ architecture a_toplevel of toplevel is
             clk : in std_logic;
             rst : in std_logic;
             wr_en : in std_logic;
-            d_out : out unsigned(6 downto 0)
+            d_out : out unsigned(6 downto 0);
+            jump : in std_logic;
+            end_jump : in unsigned(6 downto 0)
         );
     end component;
 
@@ -95,6 +97,7 @@ architecture a_toplevel of toplevel is
     signal pcuc_to_rom : unsigned(6 downto 0);
     signal reg1bit_to_pc : std_logic;
     signal rom_to_uc : unsigned(15 downto 0);
+    signal jump_to_pcuc : std_logic;
     ---------------------------------------------------------
 
 begin
@@ -136,7 +139,9 @@ begin
         clk => clk,
         rst => rst,
         wr_en => reg1bit_to_pc, 
-        d_out => pcuc_to_rom
+        d_out => pcuc_to_rom,
+        jump => jump_to_pcuc,
+        end_jump => rom_to_uc(6 downto 0)
     );
 
     incr_pc: reg1bit port map (
@@ -148,11 +153,12 @@ begin
 
     uc1: UC port map (
         instruction => rom_to_uc,
-        jump_en => uc_jump_o
+        jump_en => jump_to_pcuc
     );
     ---------------------------------------------------------
 
     ula_o <= ula_to_br;
     rom_o <= rom_to_uc;
+    uc_jump_o <= jump_to_pcuc;
 
 end architecture;
