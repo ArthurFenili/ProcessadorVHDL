@@ -15,6 +15,7 @@ entity toplevel is
         br_readReg2 : in unsigned(2 downto 0);
         br_writeReg : in unsigned(2 downto 0);
         rom_o : out unsigned(15 downto 0);
+        wr_en_pc : in std_logic
     );
 end entity;
 
@@ -67,6 +68,14 @@ architecture a_toplevel of toplevel is
             d_out : out unsigned(6 downto 0)
         );
     end component;
+
+    component reg1bit is
+        port (  clk     : in std_logic;
+            rst     : in std_logic;
+            wr_en   : in std_logic;
+            data_out: out std_logic
+        );
+    end component;
     ---------------------------------------------------------
 
     ---------------------------------------------------------
@@ -76,6 +85,7 @@ architecture a_toplevel of toplevel is
     signal mux_to_ula : unsigned(15 downto 0);
     signal ula_to_br : unsigned(15 downto 0);
     signal pcuc_to_rom : unsigned(6 downto 0);
+    signal reg1bit_to_pc : std_logic;
     ---------------------------------------------------------
 
 begin
@@ -116,8 +126,15 @@ begin
     pcuc1: PCUC port map (
         clk => clk,
         rst => rst,
-        wr_en => wr_en, 
+        wr_en => reg1bit_to_pc, 
         d_out => pcuc_to_rom
+    );
+
+    incr_pc: reg1bit port map (
+        clk => clk,
+        rst => rst,
+        wr_en => wr_en_pc, 
+        data_out => reg1bit_to_pc
     );
     ---------------------------------------------------------
 

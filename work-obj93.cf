@@ -1,43 +1,34 @@
 v 4
-file . "ROM.vhd" "3ca22ba76e1e5cc8243ce3fdedc85498d2572c35" "20230509121818.156":
-  entity rom at 1( 0) + 0 on 49;
-  architecture a_rom of rom at 14( 242) + 0 on 50;
-file . "PCUC.vhd" "647f1e7080ebdf527a6f832cda87d404df31ab41" "20230509120544.093":
-  entity pcuc at 1( 0) + 0 on 45;
-  architecture a_pcuc of pcuc at 14( 256) + 0 on 46;
-file . "PC.vhd" "b8d39e3b443cff00fdc080be680296d135e5ba2a" "20230509120517.717":
-  entity pc at 1( 0) + 0 on 41;
-  architecture a_pc of pc at 15( 301) + 0 on 42;
-file . "ula_tb.vhd" "d41f7a0a2d7c3ff1ec4f7b9abb94641addc64ec3" "20230509020409.827":
-  entity ula_tb at 1( 0) + 0 on 29;
-  architecture a_ula_tb of ula_tb at 8( 100) + 0 on 30;
-file . "toplevel_tb.vhd" "39ead3d73d46a3e53d8525670339ddd81e8284fa" "20230509121843.929":
-  entity toplevel_tb at 1( 0) + 0 on 53;
-  architecture a_toplevel_tb of toplevel_tb at 8( 105) + 0 on 54;
-file . "ula.vhd" "b02a3577358374020f80cd24d17eae7836a6e2b2" "20230509012616.019":
-  entity ula at 1( 0) + 0 on 17;
-  architecture a_ula of ula at 12( 248) + 3 on 18;
-file . "bancoreg.vhd" "bee07d821fcbdcd71a0a465b6200e9e700c69257" "20230509012557.224":
-  entity bancoreg at 1( 0) + 0 on 13;
-  architecture a_bancoreg of bancoreg at 19( 499) + 0 on 14;
-file . "reg16bits.vhd" "f81715fee2f335b84f7c5829aa148e6f9584b3a5" "20230509012547.479":
-  entity reg16bits at 1( 0) + 0 on 11;
-  architecture a_reg16bits of reg16bits at 14( 327) + 0 on 12;
-file . "mux2x1.vhd" "41a27aded6b07e31ec5ad35acc188eb561a5a224" "20230509012607.223":
-  entity mux2x1 at 1( 0) + 0 on 15;
-  architecture a_mux2x1 of mux2x1 at 13( 250) + 0 on 16;
-file . "toplevel.vhd" "d43b54205b250425b8bed624430ab3fcb6ae4422" "20230509121829.922":
-  entity toplevel at 1( 0) + 0 on 51;
-  architecture a_toplevel of toplevel at 21( 591) + 0 on 52;
-file . "bancoreg_tb.vhd" "985364bb2637f8e578aec2ed9bcc4494c3825430" "20230509021315.945":
-  entity bancoreg_tb at 1( 0) + 0 on 31;
-  architecture a_bancoreg_tb of bancoreg_tb at 8( 105) + 0 on 32;
-file . "reg1bit.vhd" "99247587774f07b9d9df4d0f799710af93100b50" "20230509120506.010":
-  entity reg1bit at 1( 0) + 0 on 39;
-  architecture a_reg1bit of reg1bit at 12( 237) + 0 on 40;
-file . "protoUC.vhd" "f3d21f3667202486c1fda0b31b5af0ffa525768b" "20230509120531.070":
-  entity protouc at 1( 0) + 0 on 43;
-  architecture a_protouc of protouc at 12( 217) + 0 on 44;
-file . "PCUC_tb.vhd" "58f3a4673140c35b1f97a8ed15bf65358e53d687" "20230509120553.401":
-  entity pcuc_tb at 1( 0) + 0 on 47;
-  architecture a_pcuc_tb of pcuc_tb at 8( 101) + 0 on 48;
+file . "protoUC.vhd" "f3d21f3667202486c1fda0b31b5af0ffa525768b" "20230509123244.457":
+  entity protouc at 1( 0) + 0 on 29;
+  architecture a_protouc of protouc at 12( 217) + 0 on 30;
+file . "ROM.vhd" "3ca22ba76e1e5cc8243ce3fdedc85498d2572c35" "20230509123225.286":
+  entity rom at 1( 0) + 0 on 25;
+  architecture a_rom of rom at 14( 242) + 0 on 26;
+file . "reg16bits.vhd" "f81715fee2f335b84f7c5829aa148e6f9584b3a5" "20230509123128.159":
+  entity reg16bits at 1( 0) + 0 on 17;
+  architecture a_reg16bits of reg16bits at 14( 327) + 0 on 18;
+file . "ULA.vhd" "b02a3577358374020f80cd24d17eae7836a6e2b2" "20230509123052.755":
+  entity ula at 1( 0) + 0 on 13;
+  architecture a_ula of ula at 12( 248) + 3 on 14;
+file . "toplevel.vhd" "ff26853774d695743996a9b4aa6a280f8e11a11d" "20230509125457.209":
+  entity toplevel at 1( 0) + 0 on 39;
+  architecture a_toplevel of toplevel at 22( 625) + 0 on 40;
+file . "bancoreg.vhd" "bee07d821fcbdcd71a0a465b6200e9e700c69257" "20230509123201.669":
+  entity bancoreg at 1( 0) + 0 on 21;
+  architecture a_bancoreg of bancoreg at 19( 499) + 0 on 22;
+file . "reg1bit.vhd" "99247587774f07b9d9df4d0f799710af93100b50" "20230509123141.115":
+  entity reg1bit at 1( 0) + 0 on 19;
+  architecture a_reg1bit of reg1bit at 12( 237) + 0 on 20;
+file . "mux2x1.vhd" "41a27aded6b07e31ec5ad35acc188eb561a5a224" "20230509123209.749":
+  entity mux2x1 at 1( 0) + 0 on 23;
+  architecture a_mux2x1 of mux2x1 at 13( 250) + 0 on 24;
+file . "PC.vhd" "b8d39e3b443cff00fdc080be680296d135e5ba2a" "20230509123233.380":
+  entity pc at 1( 0) + 0 on 27;
+  architecture a_pc of pc at 15( 301) + 0 on 28;
+file . "PCUC.vhd" "647f1e7080ebdf527a6f832cda87d404df31ab41" "20230509123320.781":
+  entity pcuc at 1( 0) + 0 on 31;
+  architecture a_pcuc of pcuc at 14( 256) + 0 on 32;
+file . "toplevel_tb.vhd" "29a23d1a87f007456851b72b1c60260f24fd5e6b" "20230509130428.410":
+  entity toplevel_tb at 1( 0) + 0 on 45;
+  architecture a_toplevel_tb of toplevel_tb at 8( 105) + 0 on 46;
