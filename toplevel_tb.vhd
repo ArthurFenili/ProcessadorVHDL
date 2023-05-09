@@ -19,7 +19,8 @@ architecture a_toplevel_tb of toplevel_tb is
             br_readReg2 : in unsigned(2 downto 0);
             br_writeReg : in unsigned(2 downto 0);
             rom_o : out unsigned(15 downto 0);
-            wr_en_pc : in std_logic
+            wr_en_pc : in std_logic;
+            uc_jump_o : out std_logic
         );
     end component;
 
@@ -37,6 +38,7 @@ architecture a_toplevel_tb of toplevel_tb is
     signal br_writeReg_s            : unsigned(2 downto 0);
     signal rom_o_s                  : unsigned(15 downto 0);
     signal wr_en_pc_s               : std_logic;
+    signal uc_jump_o_s              : std_logic;
 
     ---------------------------------------------------------
 
@@ -53,7 +55,8 @@ begin
         br_readReg2 => br_readReg2_s,
         br_writeReg => br_writeReg_s,
         rom_o => rom_o_s,
-        wr_en_pc => wr_en_pc_s
+        wr_en_pc => wr_en_pc_s,
+        uc_jump_o => uc_jump_o_s
     );
 
     ---------------------------------------------------------
