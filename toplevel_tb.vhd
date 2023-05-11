@@ -118,16 +118,7 @@ begin
         wr_en_pc_s <= '0';
         wait for 200 ns;
         wr_en_pc_s <= '1';
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
-        wait for 200 ns;
-        wr_en_pc_s <= '1';
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
+
         wait;
     end process;
     ---------------------------------------------------------
