@@ -7,13 +7,13 @@ entity toplevel is
         wr_en : in std_logic;
         rst : in std_logic;
         clk : in std_logic;
-        constant_mux1_i : in unsigned(15 downto 0);
+        --constant_mux1_i : in unsigned(15 downto 0);
         ula_o : out unsigned(15 downto 0);
-        ula_operation : in unsigned(3 downto 0);
-        mux1_selection : in std_logic;
+        --ula_operation : in unsigned(3 downto 0);
+        --mux1_selection : in std_logic;
         br_readReg1 : in unsigned(2 downto 0);
         br_readReg2 : in unsigned(2 downto 0);
-        br_writeReg : in unsigned(2 downto 0);
+        --br_writeReg : in unsigned(2 downto 0);
         rom_o : out unsigned(15 downto 0);
         wr_en_pc : in std_logic;
         uc_jump_o : out std_logic
@@ -83,7 +83,9 @@ architecture a_toplevel of toplevel is
     component UC is
         port (
             instruction : in unsigned(15 downto 0);
-            jump_en : out std_logic
+            jump_en : out std_logic;
+            ula_op : out unsigned(3 downto 0);
+            ula_src : out std_logic
         );
     end component;
     ---------------------------------------------------------
@@ -98,6 +100,9 @@ architecture a_toplevel of toplevel is
     signal reg1bit_to_pc : std_logic;
     signal rom_to_uc : unsigned(15 downto 0);
     signal jump_to_pcuc : std_logic;
+    signal uc_to_ula_op : unsigned(3 downto 0);
+    signal uc_to_mux_src : std_logic;
+    signal instruction_const : unsigned(15 downto 0);
     ---------------------------------------------------------
 
 begin
@@ -106,14 +111,14 @@ begin
     ula1: ula port map (
         x => br_to_ula,
         y => mux_to_ula,
-        op => ula_operation,
+        op => uc_to_ula_op,
         saida => ula_to_br
     );
 
     bancoreg1: bancoreg port map (
         readReg1 => br_readReg1,
         readReg2 => br_readReg2,
-        writeReg => br_writeReg,
+        writeReg => rom_to_uc(11 downto 9),
         wr_en => wr_en,
         rst => rst,
         clk => clk,
@@ -123,9 +128,9 @@ begin
     );
 
     mux2x1_1: mux2x1 port map (
-        sel => mux1_selection,
+        sel => uc_to_mux_src,
         entr0 => br_to_mux,
-        entr1 => constant_mux1_i,
+        entr1 => instruction_const,
         saida => mux_to_ula 
     );
 
@@ -153,12 +158,16 @@ begin
 
     uc1: UC port map (
         instruction => rom_to_uc,
-        jump_en => jump_to_pcuc
+        jump_en => jump_to_pcuc,
+        ula_op => uc_to_ula_op,
+        ula_src => uc_to_mux_src
     );
     ---------------------------------------------------------
 
     ula_o <= ula_to_br;
     rom_o <= rom_to_uc;
     uc_jump_o <= jump_to_pcuc;
+    instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
+                         "1111111" & rom_to_uc(8 downto 0);
 
 end architecture;

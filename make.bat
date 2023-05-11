@@ -1,0 +1,27 @@
+ghdl -a reg1bit.vhd
+ghdl -e reg1bit
+ghdl -a mux2x1.vhd
+ghdl -e mux2x1
+ghdl -a mux2x1_7bits.vhd
+ghdl -e mux2x1_7bits
+ghdl -a reg16bits.vhd
+ghdl -e reg16bits
+ghdl -a protoUC.vhd
+ghdl -e protoUC
+ghdl -a bancoreg.vhd
+ghdl -e bancoreg
+ghdl -a PC.vhd
+ghdl -e PC
+ghdl -a PCUC.vhd
+ghdl -e PCUC
+ghdl -a ROM.vhd
+ghdl -e ROM
+ghdl -a UC.vhd
+ghdl -e UC
+ghdl -a ula.vhd
+ghdl -e ula
+ghdl -a toplevel.vhd
+ghdl -e toplevel
+ghdl -a toplevel_tb.vhd
+ghdl -e toplevel_tb
+ghdl -r toplevel_tb --wave="toplevel_tb.ghw"
