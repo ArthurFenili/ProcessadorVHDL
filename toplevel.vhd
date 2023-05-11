@@ -174,7 +174,7 @@ begin
     uc_jump_o <= jump_to_pcuc;
     instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
                          "1111111" & rom_to_uc(8 downto 0);
-    readReg1_s <= rom_to_uc(8 downto 6) when rom_to_uc(15 downto 12) = "0100" else "000";
+    readReg1_s <= rom_to_uc(8 downto 6) when (rom_to_uc(15 downto 12) = "0100" or rom_to_uc(15 downto 12) = "0001") else "000";
     readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(5 downto 3);
 
 end architecture;

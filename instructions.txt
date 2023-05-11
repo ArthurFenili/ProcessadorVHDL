@@ -15,3 +15,9 @@ opcode: 0100
 formato da instrução:
 XXXX YYY ZZZ ------
 opcode | registrador de destino | registrador de origem | ------
+
+ADD
+opcode: 0001
+formato da instrução:
+XXXX YYY ZZZ WWW ---
+opcode | registrador de destino | registrador de origem 1 | registrador de origem 2 | ---
