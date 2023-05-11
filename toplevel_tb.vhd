@@ -15,8 +15,8 @@ architecture a_toplevel_tb of toplevel_tb is
             ula_o : out unsigned(15 downto 0);
             --ula_operation : in unsigned(3 downto 0);
             --mux1_selection : in std_logic;
-            br_readReg1 : in unsigned(2 downto 0);
-            br_readReg2 : in unsigned(2 downto 0);
+            --br_readReg1 : in unsigned(2 downto 0);
+            --br_readReg2 : in unsigned(2 downto 0);
             --br_writeReg : in unsigned(2 downto 0);
             rom_o : out unsigned(15 downto 0);
             wr_en_pc : in std_logic;
@@ -33,8 +33,8 @@ architecture a_toplevel_tb of toplevel_tb is
     signal ula_o_s                  : unsigned(15 downto 0);
     --signal ula_operation_s          : unsigned(3 downto 0);
     --signal mux1_selection_s         : std_logic;
-    signal br_readReg1_s            : unsigned(2 downto 0);
-    signal br_readReg2_s            : unsigned(2 downto 0);
+    --signal br_readReg1_s            : unsigned(2 downto 0);
+    --signal br_readReg2_s            : unsigned(2 downto 0);
     --signal br_writeReg_s            : unsigned(2 downto 0);
     signal rom_o_s                  : unsigned(15 downto 0);
     signal wr_en_pc_s               : std_logic;
@@ -51,8 +51,8 @@ begin
         ula_o => ula_o_s,
         --ula_operation => ula_operation_s,
         --mux1_selection => mux1_selection_s,
-        br_readReg1 => br_readReg1_s,
-        br_readReg2 => br_readReg2_s,
+        --br_readReg1 => br_readReg1_s,
+        --br_readReg2 => br_readReg2_s,
         --br_writeReg => br_writeReg_s,
         rom_o => rom_o_s,
         wr_en_pc => wr_en_pc_s,
@@ -92,27 +92,27 @@ begin
     -- tudo que a simulação vai fazer (usar os signal)
     process
     begin
-        wr_en_s <= '1';
+        --wr_en_s <= '1';
         wr_en_pc_s <= '1';
         wait for 200 ns;
         --ula_operation_s <= "0001";
-        br_readReg1_s <= "000";
-        br_readReg2_s <= "001";
+        --br_readReg1_s <= "000";
+        --br_readReg2_s <= "001";
         --mux1_selection_s <= '1';
         --br_writeReg_s <= "010";
         --constant_mux1_i_s <= "1101110100100111";
         wait for 200 ns;
         wr_en_pc_s <= '0';
-        br_readReg1_s <= "000";
-        br_readReg2_s <= "001";
+        --br_readReg1_s <= "000";
+        --br_readReg2_s <= "001";
         --mux1_selection_s <= '1';
         --br_writeReg_s <= "011";
         --constant_mux1_i_s <= "1101110101011011";
         wait for 200 ns;
         wr_en_pc_s <= '1';
         --mux1_selection_s <= '0';
-        br_readReg1_s <= "010";
-        br_readReg2_s <= "011";
+        --br_readReg1_s <= "010";
+        --br_readReg2_s <= "011";
         --br_writeReg_s <= "100";
         wait for 200 ns;
         wr_en_pc_s <= '0';

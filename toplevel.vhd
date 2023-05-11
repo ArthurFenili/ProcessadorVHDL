@@ -11,8 +11,8 @@ entity toplevel is
         ula_o : out unsigned(15 downto 0);
         --ula_operation : in unsigned(3 downto 0);
         --mux1_selection : in std_logic;
-        br_readReg1 : in unsigned(2 downto 0);
-        br_readReg2 : in unsigned(2 downto 0);
+        --br_readReg1 : in unsigned(2 downto 0);
+        --br_readReg2 : in unsigned(2 downto 0);
         --br_writeReg : in unsigned(2 downto 0);
         rom_o : out unsigned(15 downto 0);
         wr_en_pc : in std_logic;
@@ -85,7 +85,8 @@ architecture a_toplevel of toplevel is
             instruction : in unsigned(15 downto 0);
             jump_en : out std_logic;
             ula_op : out unsigned(3 downto 0);
-            ula_src : out std_logic
+            ula_src : out std_logic;
+            reg_write : out std_logic
         );
     end component;
     ---------------------------------------------------------
@@ -103,6 +104,9 @@ architecture a_toplevel of toplevel is
     signal uc_to_ula_op : unsigned(3 downto 0);
     signal uc_to_mux_src : std_logic;
     signal instruction_const : unsigned(15 downto 0);
+    signal reg_wr_en : std_logic;
+    signal readReg1_s : unsigned(2 downto 0);
+    signal readReg2_s : unsigned(2 downto 0); 
     ---------------------------------------------------------
 
 begin
@@ -116,10 +120,10 @@ begin
     );
 
     bancoreg1: bancoreg port map (
-        readReg1 => br_readReg1,
-        readReg2 => br_readReg2,
+        readReg1 => readReg1_s,
+        readReg2 => readReg2_s,
         writeReg => rom_to_uc(11 downto 9),
-        wr_en => wr_en,
+        wr_en => reg_wr_en,
         rst => rst,
         clk => clk,
         data => ula_to_br,
@@ -160,7 +164,8 @@ begin
         instruction => rom_to_uc,
         jump_en => jump_to_pcuc,
         ula_op => uc_to_ula_op,
-        ula_src => uc_to_mux_src
+        ula_src => uc_to_mux_src,
+        reg_write => reg_wr_en
     );
     ---------------------------------------------------------
 
@@ -169,5 +174,7 @@ begin
     uc_jump_o <= jump_to_pcuc;
     instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
                          "1111111" & rom_to_uc(8 downto 0);
+    readReg1_s <= rom_to_uc(8 downto 6) when rom_to_uc(15 downto 12) = "0100" else "000";
+    readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(5 downto 3);
 
 end architecture;

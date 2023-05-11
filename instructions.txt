@@ -1,0 +1,17 @@
+ADDI
+opcode: 1000
+formato da instrução:
+XXXX YYY ZZZZZZZZZ
+opcode | registrador de destino | constante
+
+JUMP
+opcode: 1111
+formato da instrução:
+XXXX ----- YYYYYYY
+opcode | ----- | endereço do deslocamento
+
+MOVEM
+opcode: 0100
+formato da instrução:
+XXXX YYY ZZZ ------
+opcode | registrador de destino | registrador de origem | ------
