@@ -89,6 +89,16 @@ architecture a_toplevel of toplevel is
             reg_write : out std_logic
         );
     end component;
+
+    component reg16bits is
+        port (  
+            clk     : in std_logic;
+            rst     : in std_logic;
+            wr_en   : in std_logic;
+            data_in : in unsigned(15 downto 0);
+            data_out: out unsigned(15 downto 0)
+        );
+    end component;
     ---------------------------------------------------------
 
     ---------------------------------------------------------
@@ -167,10 +177,17 @@ begin
         ula_src => uc_to_mux_src,
         reg_write => reg_wr_en
     );
+
+    reg_inst: reg16bits port map (
+        clk => clk,
+        rst => rst,
+        wr_en => '1',
+        data_in => rom_to_uc,
+        data_out => rom_o
+    );
     ---------------------------------------------------------
 
     ula_o <= ula_to_br;
-    rom_o <= rom_to_uc;
     uc_jump_o <= jump_to_pcuc;
     instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
                          "1111111" & rom_to_uc(8 downto 0);
