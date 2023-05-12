@@ -2,11 +2,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity toplevel_tb is
+entity processador_tb is
 end;
 
-architecture a_toplevel_tb of toplevel_tb is
-    component toplevel is
+architecture a_processador_tb of processador_tb is
+    component processador is
         port(
             wr_en : in std_logic;
             rst : in std_logic;

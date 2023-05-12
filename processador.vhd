@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity toplevel is
+entity processador is
     port(
         wr_en : in std_logic;
         rst : in std_logic;
@@ -20,7 +20,7 @@ entity toplevel is
     );
 end entity;
 
-architecture a_toplevel of toplevel is
+architecture a_processador of processador is
     ---------------------------------------------------------
     -- declara os componentes que serão utilizados
     component ula is 

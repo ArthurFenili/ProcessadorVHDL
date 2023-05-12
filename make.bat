@@ -20,8 +20,8 @@ ghdl -a UC.vhd
 ghdl -e UC
 ghdl -a ula.vhd
 ghdl -e ula
-ghdl -a toplevel.vhd
-ghdl -e toplevel
-ghdl -a toplevel_tb.vhd
-ghdl -e toplevel_tb
-ghdl -r toplevel_tb --wave="toplevel_tb.ghw"
+ghdl -a processador.vhd
+ghdl -e processador
+ghdl -a processador_tb.vhd
+ghdl -e processador_tb
+ghdl -r processador_tb --wave="toplevel_tb.ghw"
