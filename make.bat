@@ -10,6 +10,8 @@ ghdl -a protoUC.vhd
 ghdl -e protoUC
 ghdl -a bancoreg.vhd
 ghdl -e bancoreg
+ghdl -a maq_estados.vhd
+ghdl -e maq_estados
 ghdl -a PC.vhd
 ghdl -e PC
 ghdl -a PCUC.vhd

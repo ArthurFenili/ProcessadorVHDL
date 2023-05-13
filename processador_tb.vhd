@@ -8,19 +8,14 @@ end;
 architecture a_processador_tb of processador_tb is
     component processador is
         port(
-            wr_en : in std_logic;
             rst : in std_logic;
             clk : in std_logic;
-            --constant_mux1_i : in unsigned(15 downto 0);
             ula_o : out unsigned(15 downto 0);
-            --ula_operation : in unsigned(3 downto 0);
-            --mux1_selection : in std_logic;
-            --br_readReg1 : in unsigned(2 downto 0);
-            --br_readReg2 : in unsigned(2 downto 0);
-            --br_writeReg : in unsigned(2 downto 0);
-            rom_o : out unsigned(15 downto 0);
-            wr_en_pc : in std_logic;
-            uc_jump_o : out std_logic
+            inst_o : out unsigned(15 downto 0);
+            pc_o : out unsigned(6 downto 0);
+            reg1_o : out unsigned(15 downto 0);
+            reg2_o : out unsigned(15 downto 0);
+            estado_o : out unsigned(1 downto 0)
         );
     end component;
 
@@ -29,34 +24,25 @@ architecture a_processador_tb of processador_tb is
     constant period_time            : time       := 100 ns;
     signal finished                 : std_logic  := '0';
     signal wr_en_s, rst_s, clk_s    : std_logic;
-    --signal constant_mux1_i_s        : unsigned(15 downto 0);
     signal ula_o_s                  : unsigned(15 downto 0);
-    --signal ula_operation_s          : unsigned(3 downto 0);
-    --signal mux1_selection_s         : std_logic;
-    --signal br_readReg1_s            : unsigned(2 downto 0);
-    --signal br_readReg2_s            : unsigned(2 downto 0);
-    --signal br_writeReg_s            : unsigned(2 downto 0);
-    signal rom_o_s                  : unsigned(15 downto 0);
-    signal wr_en_pc_s               : std_logic;
-    signal uc_jump_o_s              : std_logic;
+    signal inst_o_s                 : unsigned(15 downto 0);
+    signal pc_o_s                   : unsigned(6 downto 0);
+    signal reg1_o_s                 : unsigned(15 downto 0);
+    signal reg2_o_s                 : unsigned(15 downto 0);
+    signal estado_maq_s             : unsigned(1 downto 0);
 
     ---------------------------------------------------------
 
 begin
-    uut: toplevel port map (
-        wr_en => wr_en_s,
+    uut: processador port map (
         rst => rst_s,
         clk => clk_s,
-        --constant_mux1_i => constant_mux1_i_s,
         ula_o => ula_o_s,
-        --ula_operation => ula_operation_s,
-        --mux1_selection => mux1_selection_s,
-        --br_readReg1 => br_readReg1_s,
-        --br_readReg2 => br_readReg2_s,
-        --br_writeReg => br_writeReg_s,
-        rom_o => rom_o_s,
-        wr_en_pc => wr_en_pc_s,
-        uc_jump_o => uc_jump_o_s
+        inst_o => inst_o_s,
+        pc_o => pc_o_s,
+        reg1_o => reg1_o_s,
+        reg2_o => reg2_o_s,
+        estado_o => estado_maq_s
     );
 
     ---------------------------------------------------------
@@ -92,33 +78,6 @@ begin
     -- tudo que a simulação vai fazer (usar os signal)
     process
     begin
-        --wr_en_s <= '1';
-        wr_en_pc_s <= '1';
-        wait for 200 ns;
-        --ula_operation_s <= "0001";
-        --br_readReg1_s <= "000";
-        --br_readReg2_s <= "001";
-        --mux1_selection_s <= '1';
-        --br_writeReg_s <= "010";
-        --constant_mux1_i_s <= "1101110100100111";
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
-        --br_readReg1_s <= "000";
-        --br_readReg2_s <= "001";
-        --mux1_selection_s <= '1';
-        --br_writeReg_s <= "011";
-        --constant_mux1_i_s <= "1101110101011011";
-        wait for 200 ns;
-        wr_en_pc_s <= '1';
-        --mux1_selection_s <= '0';
-        --br_readReg1_s <= "010";
-        --br_readReg2_s <= "011";
-        --br_writeReg_s <= "100";
-        wait for 200 ns;
-        wr_en_pc_s <= '0';
-        wait for 200 ns;
-        wr_en_pc_s <= '1';
-
         wait;
     end process;
     ---------------------------------------------------------

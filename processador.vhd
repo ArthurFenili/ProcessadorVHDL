@@ -4,19 +4,14 @@ use ieee.numeric_std.all;
 
 entity processador is
     port(
-        wr_en : in std_logic;
         rst : in std_logic;
         clk : in std_logic;
-        --constant_mux1_i : in unsigned(15 downto 0);
         ula_o : out unsigned(15 downto 0);
-        --ula_operation : in unsigned(3 downto 0);
-        --mux1_selection : in std_logic;
-        --br_readReg1 : in unsigned(2 downto 0);
-        --br_readReg2 : in unsigned(2 downto 0);
-        --br_writeReg : in unsigned(2 downto 0);
-        rom_o : out unsigned(15 downto 0);
-        wr_en_pc : in std_logic;
-        uc_jump_o : out std_logic
+        inst_o : out unsigned(15 downto 0);
+        pc_o : out unsigned(6 downto 0);
+        reg1_o : out unsigned(15 downto 0);
+        reg2_o : out unsigned(15 downto 0);
+        estado_o : out unsigned(1 downto 0)
     );
 end entity;
 
@@ -82,11 +77,14 @@ architecture a_processador of processador is
 
     component UC is
         port (
+            clk, rst : in std_logic;
             instruction : in unsigned(15 downto 0);
             jump_en : out std_logic;
             ula_op : out unsigned(3 downto 0);
             ula_src : out std_logic;
-            reg_write : out std_logic
+            reg_write : out std_logic;
+            pc_wr_en : out std_logic;
+            estado_maq : out unsigned(1 downto 0)
         );
     end component;
 
@@ -116,7 +114,8 @@ architecture a_processador of processador is
     signal instruction_const : unsigned(15 downto 0);
     signal reg_wr_en : std_logic;
     signal readReg1_s : unsigned(2 downto 0);
-    signal readReg2_s : unsigned(2 downto 0); 
+    signal readReg2_s : unsigned(2 downto 0);
+    signal uc_to_pc : std_logic; 
     ---------------------------------------------------------
 
 begin
@@ -157,25 +156,22 @@ begin
     pcuc1: PCUC port map (
         clk => clk,
         rst => rst,
-        wr_en => reg1bit_to_pc, 
+        wr_en => uc_to_pc, 
         d_out => pcuc_to_rom,
         jump => jump_to_pcuc,
         end_jump => rom_to_uc(6 downto 0)
     );
 
-    incr_pc: reg1bit port map (
+    uc1: UC port map (
         clk => clk,
         rst => rst,
-        wr_en => wr_en_pc, 
-        data_out => reg1bit_to_pc
-    );
-
-    uc1: UC port map (
         instruction => rom_to_uc,
         jump_en => jump_to_pcuc,
         ula_op => uc_to_ula_op,
         ula_src => uc_to_mux_src,
-        reg_write => reg_wr_en
+        reg_write => reg_wr_en,
+        pc_wr_en => uc_to_pc,
+        estado_maq => estado_o
     );
 
     reg_inst: reg16bits port map (
@@ -183,12 +179,14 @@ begin
         rst => rst,
         wr_en => '1',
         data_in => rom_to_uc,
-        data_out => rom_o
+        data_out => inst_o
     );
     ---------------------------------------------------------
 
     ula_o <= ula_to_br;
-    uc_jump_o <= jump_to_pcuc;
+    pc_o <= pcuc_to_rom;
+    reg1_o <= br_to_ula;
+    reg2_o <= br_to_mux; 
     instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
                          "1111111" & rom_to_uc(8 downto 0);
     readReg1_s <= rom_to_uc(8 downto 6) when (rom_to_uc(15 downto 12) = "0100" or rom_to_uc(15 downto 12) = "0001" or rom_to_uc(15 downto 12) = "0010") else "000";
