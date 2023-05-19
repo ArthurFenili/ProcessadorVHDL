@@ -4,7 +4,7 @@ formato da instrução:
 XXXX YYY ZZZZZZZZZ
 opcode | registrador de destino | constante
 
-JUMP
+JMP
 opcode: 1111
 formato da instrução:
 XXXX ----- YYYYYYY
