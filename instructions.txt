@@ -30,6 +30,34 @@ opcode | registrador de destino | registrador de origem 1 | registrador de orige
 
 NOP
 opcode: 0000
-formato da instrução
+formato da instrução:
 XXXX ------------
 opcode | ---------------
+
+BLT
+opcode (branch): 0110
+opcode (less than): 1101
+teste de flag: N & ~V | ~N & V
+formato da instrução:
+XXXX YYYY ZZZZZZZZ
+opcode(branch) | opcode(LT) | endereços de pulo
+
+BGE
+opcode (branch): 0110
+opcode (greater or equal): 1100
+teste de flag: N & V | ~N & ~V
+formato da instrução:
+XXXX YYYY ZZZZZZZZ
+opcode(branch) | opcode(GE) | endereços de pulo
+
+
+
+tem o opcode geral pra saber que é um branch
+
+aí tem a condition que é o opcode de cada um dos branches
+
+vamos verificar o opcode geral, se for branch ja passa o endereço (8 ultimos bits) pro endereço de jump
+aí verifica a condition qual é e faz as operações com as flags, se as operações derem true, ativa o jump_en
+
+criar uma entrada no PCUC de end_branch que vai receber o deslocamento da isntrução e se o jump en for true,
+soma o deslocamento com o d_out do PCUC

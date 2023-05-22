@@ -2,17 +2,15 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-
--- fazer o data in do pc receber o end_jump quando jump = 1
-
 entity PCUC is
     port (
         clk : in std_logic;
         rst : in std_logic;
         wr_en : in std_logic;
         d_out : out unsigned(6 downto 0);
-        jump : in std_logic;
-        end_jump : in unsigned(6 downto 0)
+        jump : in unsigned(1 downto 0);
+        end_jump : in unsigned(6 downto 0);
+        end_branch : in unsigned(6 downto 0)
     );
 end entity;
 
@@ -34,10 +32,10 @@ architecture a_PCUC of PCUC is
         );
     end component;
 
-    component mux2x1_7bits is
+    component mux3x1_7bits is
         port(
-            sel : in std_logic;
-            entr0, entr1 : in unsigned (6 downto 0);
+            sel : in unsigned(1 downto 0);
+            entr0, entr1, entr2 : in unsigned (6 downto 0);
             saida : out unsigned (6 downto 0)
         );
     end component;
@@ -58,10 +56,11 @@ architecture a_PCUC of PCUC is
             data_out => inpc
         );
 
-        mux1: mux2x1_7bits port map (
+        mux1: mux3x1_7bits port map (
             sel => jump,
             entr0 => inpc,
             entr1 => end_jump,
+            entr2 => end_branch,
             saida => jump_pc
         );
 

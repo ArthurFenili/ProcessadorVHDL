@@ -2,8 +2,10 @@ ghdl -a reg1bit.vhd
 ghdl -e reg1bit
 ghdl -a mux2x1.vhd
 ghdl -e mux2x1
-ghdl -a mux2x1_7bits.vhd
-ghdl -e mux2x1_7bits
+ghdl -a mux3x1_7bits.vhd
+ghdl -e mux3x1_7bits
+ghdl -a CCR.vhd
+ghdl -e CCR
 ghdl -a reg16bits.vhd
 ghdl -e reg16bits
 ghdl -a protoUC.vhd
