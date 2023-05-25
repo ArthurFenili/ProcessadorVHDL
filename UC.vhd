@@ -42,8 +42,10 @@ begin
     branch_code <= instruction(11 downto 8);
     
     jump_en <= "01" when opcode = "1111" else
-                "10" when opcode = "0110" and branch_code = "1101" and ((n_flag_in = '1' and v_flag_in = '0') or (n_flag_in = '0' and v_flag_in = '1')) else
-                "10" when opcode = "0110" and branch_code = "1100" and ((n_flag_in = '1' and v_flag_in = '1') or (n_flag_in = '0' and v_flag_in = '0')) else
+                "10" when opcode = "0110" and branch_code = "1101" 
+                            and ((n_flag_in and not(v_flag_in)) or (not(n_flag_in) and v_flag_in)) else
+                "10" when opcode = "0110" and branch_code = "1100" 
+                            and  (n_flag_in and v_flag_in) or (not(n_flag_in) and not(v_flag_in)) else
                 "00";
 
     pc_wr_en <= '1' when estado_s = "00" else '0';
