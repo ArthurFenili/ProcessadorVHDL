@@ -4,17 +4,30 @@ use ieee.numeric_std.all;
 
 entity CCR is
     port (
-        entrada : in unsigned(15 downto 0);
-        saida : out unsigned(4 downto 0) --XNZVC
+        clk     : in std_logic;
+        rst     : in std_logic;
+        wr_en   : in std_logic;
+        n_in, v_in : in std_logic;
+        n_out, v_out : out std_logic
     );
 end entity;
 
 architecture a_CCR of CCR is
+    signal n_s, v_s: std_logic;
+begin
+    process(clk, rst, wr_en)
     begin
-        saida(4) <= '0';
-        saida(3) <= '1' when entrada(15) = '1' else '0'; --negative
-        saida(2) <= '1' when entrada = "0000000000000000" else '0'; --zero
-        saida(1) <= '0';
-        saida(0) <= '0';
+        if rst='1' then
+            n_s <= '0';
+            v_s <= '0';
+        elsif wr_en='1' then
+            if rising_edge(clk) then
+                n_s <= n_in;
+                v_s <= v_in;
+            end if;
+        end if;
+    end process;
 
+    n_out <= n_s;
+    v_out <= v_s;
 end architecture;

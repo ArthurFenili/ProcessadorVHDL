@@ -12,7 +12,8 @@ entity UC is
         reg_write : out std_logic;
         pc_wr_en : out std_logic;
         estado_maq : out unsigned(1 downto 0);
-        ccr_in : in unsigned(4 downto 0)
+        ula_wr_en : out std_logic;
+        n_flag_in, v_flag_in : in std_logic
     );
 end entity;
 
@@ -36,14 +37,17 @@ begin
     );
 
 
+    estado_maq <= estado_s;
     opcode <= instruction(15 downto 12);
     branch_code <= instruction(11 downto 8);
+    
     jump_en <= "01" when opcode = "1111" else
-                "10" when opcode = "0110" and branch_code = "1101" and ((ccr_in(3) = '1' and ccr_in(1) = '0') or (ccr_in(3) = '0' and ccr_in(1) = '1')) else
-                "10" when opcode = "0110" and branch_code = "1100" and ((ccr_in(3) = '1' and ccr_in(1) = '1') or (ccr_in(3) = '0' and ccr_in(1) = '0')) else
+                "10" when opcode = "0110" and branch_code = "1101" and ((n_flag_in = '1' and v_flag_in = '0') or (n_flag_in = '0' and v_flag_in = '1')) else
+                "10" when opcode = "0110" and branch_code = "1100" and ((n_flag_in = '1' and v_flag_in = '1') or (n_flag_in = '0' and v_flag_in = '0')) else
                 "00";
+
     pc_wr_en <= '1' when estado_s = "00" else '0';
-    estado_maq <= estado_s;
+    ula_wr_en <= '1' when estado_s = "00" else '0';
 
     ula_op <= "0001" when (opcode = "1000" or opcode = "0100" or opcode = "0001") else 
               "0010" when (opcode = "0010") else 

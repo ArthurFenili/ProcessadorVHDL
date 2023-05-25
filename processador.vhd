@@ -22,7 +22,8 @@ architecture a_processador of processador is
         port( 
             x,y : in unsigned(15 downto 0);
             op : in unsigned(3 downto 0);
-            saida : out unsigned(15 downto 0)
+            saida : out unsigned(15 downto 0);
+            n_flag, v_flag : out std_logic
         );
     end component;
 
@@ -86,7 +87,8 @@ architecture a_processador of processador is
             reg_write : out std_logic;
             pc_wr_en : out std_logic;
             estado_maq : out unsigned(1 downto 0);
-            ccr_in : in unsigned(4 downto 0)
+            ula_wr_en : out std_logic;
+            n_flag_in, v_flag_in : in std_logic
         );
     end component;
 
@@ -102,8 +104,11 @@ architecture a_processador of processador is
 
     component CCR is
         port (
-            entrada : in unsigned(15 downto 0);
-            saida : out unsigned(4 downto 0) --XNZVC
+            clk     : in std_logic;
+            rst     : in std_logic;
+            wr_en   : in std_logic;
+            n_in, v_in : in std_logic;
+            n_out, v_out : out std_logic
         );
     end component;
     ---------------------------------------------------------
@@ -126,6 +131,11 @@ architecture a_processador of processador is
     signal readReg2_s : unsigned(2 downto 0);
     signal uc_to_pc : std_logic; 
     signal ccr_to_uc : unsigned(4 downto 0);
+    signal ula_out_to_ccr : unsigned(15 downto 0);
+    signal branch_dest : unsigned(6 downto 0);
+    signal uc_to_ula : std_logic;
+    signal nflag_s, vflag_s : std_logic;
+    signal nflag_out_s, vflag_out_s : std_logic;
     ---------------------------------------------------------
 
 begin
@@ -135,7 +145,9 @@ begin
         x => br_to_ula,
         y => mux_to_ula,
         op => uc_to_ula_op,
-        saida => ula_to_br
+        saida => ula_to_br,
+        n_flag => nflag_s,
+        v_flag => vflag_s 
     );
 
     bancoreg1: bancoreg port map (
@@ -170,7 +182,7 @@ begin
         d_out => pcuc_to_rom,
         jump => jump_to_pcuc,
         end_jump => rom_to_uc(6 downto 0),
-        end_branch => rom_to_uc(6 downto 0)
+        end_branch => branch_dest
     );
 
     uc1: UC port map (
@@ -183,7 +195,9 @@ begin
         reg_write => reg_wr_en,
         pc_wr_en => uc_to_pc,
         estado_maq => estado_o,
-        ccr_in => ccr_to_uc
+        ula_wr_en => uc_to_ula,
+        n_flag_in => nflag_out_s, 
+        v_flag_in => vflag_out_s
     );
 
     reg_inst: reg16bits port map (
@@ -195,9 +209,23 @@ begin
     );
 
     ccr1: CCR port map (
-        entrada => ula_to_br,
-        saida => ccr_to_uc
+        clk => clk, 
+        rst => rst,
+        wr_en => uc_to_ula,
+        n_in => nflag_s, 
+        v_in => vflag_s,
+        n_out => nflag_out_s, 
+        v_out => vflag_out_s
     );
+
+    ula_result: reg16bits port map (
+        clk => clk,
+        rst => rst,
+        wr_en => uc_to_ula,
+        data_in => ula_to_br,
+        data_out => ula_out_to_ccr
+    );
+
     ---------------------------------------------------------
 
     ula_o <= ula_to_br;
@@ -208,5 +236,6 @@ begin
                          "1111111" & rom_to_uc(8 downto 0);
     readReg1_s <= rom_to_uc(8 downto 6) when (rom_to_uc(15 downto 12) = "0100" or rom_to_uc(15 downto 12) = "0001" or rom_to_uc(15 downto 12) = "0010") else "000";
     readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(5 downto 3);
+    branch_dest <= rom_to_uc(6 downto 0);
 
 end architecture;
