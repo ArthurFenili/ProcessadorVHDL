@@ -46,8 +46,9 @@ begin
                 "10" when opcode = "0110" and branch_code = "1100" and std_logic((n_flag_in and v_flag_in) or (not(n_flag_in) and not(v_flag_in))) = '1' else
                 "00";
 
-    pc_wr_en <= '1' when estado_s = "00" else '0';
-    ula_wr_en <= '1' when estado_s = "00" else '0';
+    pc_wr_en <=   '1' when estado_s = "00" else '0';
+
+    ula_wr_en <=  '1' when estado_s = "00" and (opcode = "0001" or opcode = "1000" or opcode = "0010") else '0';
 
     ula_op <= "0001" when (opcode = "1000" or opcode = "0100" or opcode = "0001") else 
               "0010" when (opcode = "0010") else 
