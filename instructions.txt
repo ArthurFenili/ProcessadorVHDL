@@ -10,23 +10,26 @@ formato da instrução:
 XXXX ----- YYYYYYY
 opcode | ----- | endereço do deslocamento
 
-MOVEM
+MOVE
 opcode: 0100
 formato da instrução:
 XXXX YYY ZZZ ------
 opcode | registrador de destino | registrador de origem | ------
+MOVE.sz <ea>y,<ea>x
 
 ADD
 opcode: 0001
 formato da instrução:
 XXXX YYY ZZZ WWW ---
-opcode | registrador de destino | registrador de origem 1 | registrador de origem 2 | ---
+opcode | registrador de destino | registrador de origem | ------
+ADD.L <ea>y,Dx
 
 SUB
 opcode: 0010
 formato da instrução:
 XXXX YYY ZZZ WWW ---
-opcode | registrador de destino | registrador de origem 1 | registrador de origem 2 | ---
+opcode | registrador de destino | registrador de origem | ------
+SUB.L <ea>y,Dx
 
 NOP
 opcode: 0000
