@@ -29,9 +29,10 @@ architecture a_ula of ula is
     -- quando as entradas forem positivas e a saida positiva, não há overflow (0)
     -- quando as entradas forem positivas e a saida negativa, há overflow (1)
 
-    v_flag <=   '0' when x(15) = '0' and y(15) = '0' and saidain(15) = '1' and op = "0010" and y>x else
-                '1' when x(15) = '0' and y(15) = '0' and saidain(15) = '1' else
-                '1' when x(15) = '1' and y(15) = '1' and saidain(15) = '0' else
+    v_flag <=   '1' when x(15) = '1' and y(15) = '0' and saidain(15) = '0' and op = "0010" else     
+                '1' when x(15) = '0' and y(15) = '1' and saidain(15) = '1' and op = "0010" else
+                '1' when x(15) = '0' and y(15) = '0' and saidain(15) = '1' and op = "0001" else
+                '1' when x(15) = '1' and y(15) = '1' and saidain(15) = '0' and op = "0001" else
                 '0';
 
     saida <=    saidain;
