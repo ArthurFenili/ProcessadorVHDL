@@ -1,18 +1,9 @@
-        ADDI.L 0, D3
-        ADDI.L 0, D4
-        ADDI.L 30, D7
-        ADDI.L 1, D6
-
-loop    ADD.L <ea>y,D4
-        ADD.L D3,<ea>x
-
-        ADD.L <ea>y,D3
-        ADD.L D6,<ea>x
-
-        SUB.L <ea>y,Dx
-        SUB.L Dy,<ea>x
-
-        BLT.B loop
-
-        MOVEM.L D5,<ea>x
-        MOVEM.L <ea>y,D41 
+                ADDI.L 0,D3
+                ADDI.L 0,D4
+                ADDI.L 30,D7
+                ADDI.L 1,D6
+loop:           ADD.L D3,D4
+                ADD.L D6,D3
+                CMP.sz D7,D3
+                BLT.sz loop
+                MOVE.sz D4,D5

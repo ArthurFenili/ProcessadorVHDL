@@ -48,10 +48,10 @@ begin
 
     pc_wr_en <=   '1' when estado_s = "00" else '0';
 
-    ula_wr_en <=  '1' when estado_s = "00" and (opcode = "0001" or opcode = "1000" or opcode = "0010") else '0';
+    ula_wr_en <=  '1' when estado_s = "00" and (opcode = "0001" or opcode = "1000" or opcode = "0010" or opcode = "1011") else '0';
 
     ula_op <= "0001" when (opcode = "1000" or opcode = "0100" or opcode = "0001") else 
-              "0010" when (opcode = "0010") else 
+              "0010" when (opcode = "0010" or opcode = "1011") else 
               "0000";
 
     ula_src <= '1' when opcode = "1000" else '0'; -- quando addi o mux vai mandar a entr1 (constante)
