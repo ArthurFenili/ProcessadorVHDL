@@ -19,6 +19,20 @@ XXXX YYY ZZZ ------
 opcode | registrador de destino | registrador de origem | ------
 MOVE.sz <ea>y,<ea>x
 
+MOVE (load word)
+opcode: 0101
+formato da instrução:
+XXXX YYY ZZZ ------
+opcode | registrador de destino | registrador de origem(endereço da ram) | ------
+MOVE.sz <ea>y,<ea>x
+
+MOVE (store word)
+opcode: 0111
+formato da instrução:
+XXXX YYY ZZZ ------
+opcode | registrador de destino(endereço da ram) | registrador de origem | ------
+MOVE.sz <ea>y,<ea>x
+
 ADD
 opcode: 0001
 formato da instrução:

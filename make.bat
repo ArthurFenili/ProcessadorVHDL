@@ -20,6 +20,8 @@ ghdl -a PCUC.vhd
 ghdl -e PCUC
 ghdl -a ROM.vhd
 ghdl -e ROM
+ghdl -a RAM.vhd
+ghdl -e RAM
 ghdl -a UC.vhd
 ghdl -e UC
 ghdl -a ula.vhd
