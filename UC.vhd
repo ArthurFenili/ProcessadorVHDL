@@ -13,7 +13,8 @@ entity UC is
         pc_wr_en : out std_logic;
         estado_maq : out unsigned(1 downto 0);
         ula_wr_en : out std_logic;
-        n_flag_in, v_flag_in : in std_logic
+        n_flag_in, v_flag_in : in std_logic;
+        ram_wr_en : out std_logic
     );
 end entity;
 

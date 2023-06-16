@@ -77,3 +77,11 @@ formato da instrução:
 XXXX YYYY ZZZZZZZZ
 opcode(branch) | opcode(GE) | endereços de pulo
 Bcc.sz <label>
+
+
+move load word vai pegar o valor que está no endereço ZZZ da ram e salvar
+no endereço YYY do banco reg
+pra isso precisa ativar o wr_en do YYY
+
+move store word vai pegar o valor que ta no endereço ZZZ do banco reg
+e salvar no endereço YYY da ram

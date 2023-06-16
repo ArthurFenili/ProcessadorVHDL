@@ -88,7 +88,8 @@ architecture a_processador of processador is
             pc_wr_en : out std_logic;
             estado_maq : out unsigned(1 downto 0);
             ula_wr_en : out std_logic;
-            n_flag_in, v_flag_in : in std_logic
+            n_flag_in, v_flag_in : in std_logic;
+            ram_wr_en : out std_logic
         );
     end component;
 
@@ -109,6 +110,16 @@ architecture a_processador of processador is
             wr_en   : in std_logic;
             n_in, v_in : in std_logic;
             n_out, v_out : out std_logic
+        );
+    end component;
+    
+    component RAM is
+        port (
+            clk : in std_logic;
+            endereco : in unsigned(6 downto 0);
+            wr_en : in std_logic;
+            dado_in : in unsigned(15 downto 0);
+            dado_out : out unsigned(15 downto 0)
         );
     end component;
     ---------------------------------------------------------
@@ -136,6 +147,7 @@ architecture a_processador of processador is
     signal uc_to_ula : std_logic;
     signal nflag_s, vflag_s : std_logic;
     signal nflag_out_s, vflag_out_s : std_logic;
+    signal ram_wr_en_s : std_logic;
     ---------------------------------------------------------
 
 begin
@@ -197,7 +209,8 @@ begin
         estado_maq => estado_o,
         ula_wr_en => uc_to_ula,
         n_flag_in => nflag_out_s, 
-        v_flag_in => vflag_out_s
+        v_flag_in => vflag_out_s,
+        ram_wr_en => ram_wr_en_s
     );
 
     reg_inst: reg16bits port map (
@@ -224,6 +237,14 @@ begin
         wr_en => uc_to_ula,
         data_in => ula_to_br,
         data_out => ula_out_to_ccr
+    );
+
+    ram1: RAM port map (
+        clk => clk,
+        endereco => ,
+        wr_en => ram_wr_en_s,
+        dado_in => ula_to_br,
+        dado_out => 
     );
 
     ---------------------------------------------------------
