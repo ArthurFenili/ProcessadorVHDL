@@ -129,7 +129,8 @@ architecture a_processador of processador is
     signal br_to_ula : unsigned(15 downto 0);
     signal br_to_mux : unsigned(15 downto 0);
     signal mux_to_ula : unsigned(15 downto 0);
-    signal ula_to_br : unsigned(15 downto 0);
+    signal br_in_s : unsigned(15 downto 0);
+    signal ula_out_s : unsigned(15 downto 0);
     signal pcuc_to_rom : unsigned(6 downto 0);
     signal reg1bit_to_pc : std_logic;
     signal rom_to_uc : unsigned(15 downto 0);
@@ -148,6 +149,7 @@ architecture a_processador of processador is
     signal nflag_s, vflag_s : std_logic;
     signal nflag_out_s, vflag_out_s : std_logic;
     signal ram_wr_en_s : std_logic;
+    signal ram_data_out_s : unsigned(15 downto 0);
     ---------------------------------------------------------
 
 begin
@@ -157,7 +159,7 @@ begin
         x => br_to_ula,
         y => mux_to_ula,
         op => uc_to_ula_op,
-        saida => ula_to_br,
+        saida => ula_out_s,
         n_flag => nflag_s,
         v_flag => vflag_s 
     );
@@ -169,7 +171,7 @@ begin
         wr_en => reg_wr_en,
         rst => rst,
         clk => clk,
-        data => ula_to_br,
+        data => br_in_s,
         readData1 => br_to_ula,
         readData2 => br_to_mux
     );
@@ -235,29 +237,32 @@ begin
         clk => clk,
         rst => rst,
         wr_en => uc_to_ula,
-        data_in => ula_to_br,
+        data_in => ula_out_s,
         data_out => ula_out_to_ccr
     );
 
     ram1: RAM port map (
         clk => clk,
-        endereco => ,
+        endereco => br_to_ula(6 downto 0),
         wr_en => ram_wr_en_s,
-        dado_in => ula_to_br,
-        dado_out => 
+        dado_in => br_to_mux,
+        dado_out => ram_data_out_s
     );
 
     ---------------------------------------------------------
 
-    ula_o <= ula_to_br;
+    ula_o <= ula_out_s;
     pc_o <= pcuc_to_rom;
     reg1_o <= br_to_ula;
     reg2_o <= br_to_mux; 
     instruction_const <= "0000000" & rom_to_uc(8 downto 0) when rom_to_uc(8) = '0' else 
                          "1111111" & rom_to_uc(8 downto 0);
-    readReg1_s <= rom_to_uc(11 downto 9) when (rom_to_uc(15 downto 12) = "0001" or rom_to_uc(15 downto 12) = "0010" or rom_to_uc(15 downto 12) = "1011") else 
+    readReg1_s <= rom_to_uc(11 downto 9) when (rom_to_uc(15 downto 12) = "0001" or rom_to_uc(15 downto 12) = "0010" or rom_to_uc(15 downto 12) = "1011" or rom_to_uc(15 downto 12) = "0111") else 
                   rom_to_uc(8 downto 6) when rom_to_uc(15 downto 12) = "0100" else "000";
     readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(8 downto 6);
     branch_dest <= rom_to_uc(6 downto 0);
+    br_in_s <= ram_data_out_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
+
+
 
 end architecture;

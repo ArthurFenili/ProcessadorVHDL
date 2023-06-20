@@ -58,5 +58,6 @@ begin
     ula_src <= '1' when opcode = "1000" else '0'; -- quando addi o mux vai mandar a entr1 (constante)
 
     reg_write <= '1' when estado_s = "01" and (opcode = "0100" or opcode = "1000" or opcode = "0001" or opcode = "0010") else '0';
+    ram_wr_en <= '1' when opcode = "0111";
 
 end architecture;
