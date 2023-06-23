@@ -7,3 +7,45 @@ loop:           ADD.L D3,D4
                 CMP.sz D7,D3
                 BLT.sz loop
                 MOVE.sz D4,D5
+
+
+
+
+                addi 0, d1
+                addi 32, d2
+                addi 1, d3
+loop:           add d1, d3
+                sw d1, d1
+                cmp d1, d2
+                blt loop
+
+                addi 2, d1
+                addi 2, d3
+loop2:          add d1, d3
+                sw d1, d0
+                cmp d1, d2
+                blt loop2
+
+acha o prox não zero:
+                addi 0, d1
+                add d1, d3
+                addi 1, d4
+loop3:          add d1, d4
+                lw d5, d1
+                cmp d5, d4
+                blt loop3
+
+                addi 0, d3
+                add d3, d1
+                jmp loop2
+
+
+
+
+
+
+
+
+
+loop pra achar o prox nao zero, quando achar usa ele nos addi 
+
