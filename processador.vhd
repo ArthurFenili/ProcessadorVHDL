@@ -150,6 +150,7 @@ architecture a_processador of processador is
     signal nflag_out_s, vflag_out_s : std_logic;
     signal ram_wr_en_s : std_logic;
     signal ram_data_out_s : unsigned(15 downto 0);
+    signal ram_result_s : unsigned(15 downto 0);
     ---------------------------------------------------------
 
 begin
@@ -248,6 +249,14 @@ begin
         dado_in => br_to_mux,
         dado_out => ram_data_out_s
     );
+
+    ram_out: reg16bits port map (
+        clk => clk,
+        rst => rst,
+        wr_en => ram_wr_en_s,
+        data_in => ram_data_out_s,
+        data_out => ram_result_s
+    );
     
 
     ---------------------------------------------------------
@@ -262,7 +271,7 @@ begin
                   rom_to_uc(8 downto 6) when rom_to_uc(15 downto 12) = "0100" else "000";
     readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(8 downto 6);
     branch_dest <= rom_to_uc(6 downto 0);
-    br_in_s <= ram_data_out_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
+    br_in_s <= ram_result_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
 
 
 
