@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Wed Jun 28 12:10:24 2023
+[*] Wed Jun 28 12:22:39 2023
 [*]
 [dumpfile] "C:\Users\T-GAMER\Documents\processadorVHDL\processador_tb.ghw"
-[dumpfile_mtime] "Wed Jun 28 12:09:39 2023"
-[dumpfile_size] 48144
+[dumpfile_mtime] "Wed Jun 28 12:22:30 2023"
+[dumpfile_size] 48375
 [savefile] "C:\Users\T-GAMER\Documents\processadorVHDL\debug.gtkw"
-[timestart] 9000000
-[size] 934 817
+[timestart] 0
+[size] 1230 817
 [pos] -1 -1
-*-29.531872 750000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-29.531872 2632000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.processador_tb.
 [treeopen] top.processador_tb.uut.
@@ -54,7 +54,7 @@
 #{top.processador_tb.uut.bancoreg1.readdata2[15:0]} top.processador_tb.uut.bancoreg1.readdata2[15] top.processador_tb.uut.bancoreg1.readdata2[14] top.processador_tb.uut.bancoreg1.readdata2[13] top.processador_tb.uut.bancoreg1.readdata2[12] top.processador_tb.uut.bancoreg1.readdata2[11] top.processador_tb.uut.bancoreg1.readdata2[10] top.processador_tb.uut.bancoreg1.readdata2[9] top.processador_tb.uut.bancoreg1.readdata2[8] top.processador_tb.uut.bancoreg1.readdata2[7] top.processador_tb.uut.bancoreg1.readdata2[6] top.processador_tb.uut.bancoreg1.readdata2[5] top.processador_tb.uut.bancoreg1.readdata2[4] top.processador_tb.uut.bancoreg1.readdata2[3] top.processador_tb.uut.bancoreg1.readdata2[2] top.processador_tb.uut.bancoreg1.readdata2[1] top.processador_tb.uut.bancoreg1.readdata2[0]
 @200
 -saida 2 do banco
-@23
+@22
 [color] 3
 #{top.processador_tb.uut.ram1.dado_in[15:0]} top.processador_tb.uut.ram1.dado_in[15] top.processador_tb.uut.ram1.dado_in[14] top.processador_tb.uut.ram1.dado_in[13] top.processador_tb.uut.ram1.dado_in[12] top.processador_tb.uut.ram1.dado_in[11] top.processador_tb.uut.ram1.dado_in[10] top.processador_tb.uut.ram1.dado_in[9] top.processador_tb.uut.ram1.dado_in[8] top.processador_tb.uut.ram1.dado_in[7] top.processador_tb.uut.ram1.dado_in[6] top.processador_tb.uut.ram1.dado_in[5] top.processador_tb.uut.ram1.dado_in[4] top.processador_tb.uut.ram1.dado_in[3] top.processador_tb.uut.ram1.dado_in[2] top.processador_tb.uut.ram1.dado_in[1] top.processador_tb.uut.ram1.dado_in[0]
 @200
@@ -64,6 +64,16 @@
 #{top.processador_tb.uut.ram1.endereco[6:0]} top.processador_tb.uut.ram1.endereco[6] top.processador_tb.uut.ram1.endereco[5] top.processador_tb.uut.ram1.endereco[4] top.processador_tb.uut.ram1.endereco[3] top.processador_tb.uut.ram1.endereco[2] top.processador_tb.uut.ram1.endereco[1] top.processador_tb.uut.ram1.endereco[0]
 @200
 -endereço do entrada na ram
+@28
+[color] 3
+top.processador_tb.uut.ram1.wr_en
+@200
+-ram wr enable
+@22
+[color] 3
+#{top.processador_tb.uut.ram1.dado_out[15:0]} top.processador_tb.uut.ram1.dado_out[15] top.processador_tb.uut.ram1.dado_out[14] top.processador_tb.uut.ram1.dado_out[13] top.processador_tb.uut.ram1.dado_out[12] top.processador_tb.uut.ram1.dado_out[11] top.processador_tb.uut.ram1.dado_out[10] top.processador_tb.uut.ram1.dado_out[9] top.processador_tb.uut.ram1.dado_out[8] top.processador_tb.uut.ram1.dado_out[7] top.processador_tb.uut.ram1.dado_out[6] top.processador_tb.uut.ram1.dado_out[5] top.processador_tb.uut.ram1.dado_out[4] top.processador_tb.uut.ram1.dado_out[3] top.processador_tb.uut.ram1.dado_out[2] top.processador_tb.uut.ram1.dado_out[1] top.processador_tb.uut.ram1.dado_out[0]
+@200
+-dado saida ram
 @22
 [color] 3
 #{top.processador_tb.uut.ram1.conteudo_ram[10][15:0]} top.processador_tb.uut.ram1.conteudo_ram[10][15] top.processador_tb.uut.ram1.conteudo_ram[10][14] top.processador_tb.uut.ram1.conteudo_ram[10][13] top.processador_tb.uut.ram1.conteudo_ram[10][12] top.processador_tb.uut.ram1.conteudo_ram[10][11] top.processador_tb.uut.ram1.conteudo_ram[10][10] top.processador_tb.uut.ram1.conteudo_ram[10][9] top.processador_tb.uut.ram1.conteudo_ram[10][8] top.processador_tb.uut.ram1.conteudo_ram[10][7] top.processador_tb.uut.ram1.conteudo_ram[10][6] top.processador_tb.uut.ram1.conteudo_ram[10][5] top.processador_tb.uut.ram1.conteudo_ram[10][4] top.processador_tb.uut.ram1.conteudo_ram[10][3] top.processador_tb.uut.ram1.conteudo_ram[10][2] top.processador_tb.uut.ram1.conteudo_ram[10][1] top.processador_tb.uut.ram1.conteudo_ram[10][0]
@@ -79,7 +89,7 @@
 #{top.processador_tb.uut.bancoreg1.reg2.registro[15:0]} top.processador_tb.uut.bancoreg1.reg2.registro[15] top.processador_tb.uut.bancoreg1.reg2.registro[14] top.processador_tb.uut.bancoreg1.reg2.registro[13] top.processador_tb.uut.bancoreg1.reg2.registro[12] top.processador_tb.uut.bancoreg1.reg2.registro[11] top.processador_tb.uut.bancoreg1.reg2.registro[10] top.processador_tb.uut.bancoreg1.reg2.registro[9] top.processador_tb.uut.bancoreg1.reg2.registro[8] top.processador_tb.uut.bancoreg1.reg2.registro[7] top.processador_tb.uut.bancoreg1.reg2.registro[6] top.processador_tb.uut.bancoreg1.reg2.registro[5] top.processador_tb.uut.bancoreg1.reg2.registro[4] top.processador_tb.uut.bancoreg1.reg2.registro[3] top.processador_tb.uut.bancoreg1.reg2.registro[2] top.processador_tb.uut.bancoreg1.reg2.registro[1] top.processador_tb.uut.bancoreg1.reg2.registro[0]
 @200
 -conteudo do reg 2
-@22
+@23
 [color] 5
 #{top.processador_tb.uut.bancoreg1.reg7.registro[15:0]} top.processador_tb.uut.bancoreg1.reg7.registro[15] top.processador_tb.uut.bancoreg1.reg7.registro[14] top.processador_tb.uut.bancoreg1.reg7.registro[13] top.processador_tb.uut.bancoreg1.reg7.registro[12] top.processador_tb.uut.bancoreg1.reg7.registro[11] top.processador_tb.uut.bancoreg1.reg7.registro[10] top.processador_tb.uut.bancoreg1.reg7.registro[9] top.processador_tb.uut.bancoreg1.reg7.registro[8] top.processador_tb.uut.bancoreg1.reg7.registro[7] top.processador_tb.uut.bancoreg1.reg7.registro[6] top.processador_tb.uut.bancoreg1.reg7.registro[5] top.processador_tb.uut.bancoreg1.reg7.registro[4] top.processador_tb.uut.bancoreg1.reg7.registro[3] top.processador_tb.uut.bancoreg1.reg7.registro[2] top.processador_tb.uut.bancoreg1.reg7.registro[1] top.processador_tb.uut.bancoreg1.reg7.registro[0]
 @200
