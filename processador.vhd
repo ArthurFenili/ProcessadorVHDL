@@ -245,18 +245,10 @@ begin
 
     ram1: RAM port map (
         clk => clk,
-        endereco => br_to_ula(6 downto 0),
+        endereco => br_to_mux(6 downto 0),
         wr_en => ram_wr_en_s,
         dado_in => ram_data_in_s,
         dado_out => ram_data_out_s
-    );
-
-    ram_out: reg16bits port map (
-        clk => clk,
-        rst => rst,
-        wr_en => ram_wr_en_s,
-        data_in => ram_data_out_s,
-        data_out => ram_result_s
     );
     
 
@@ -272,7 +264,7 @@ begin
                   rom_to_uc(8 downto 6) when rom_to_uc(15 downto 12) = "0100" else "000";
     readReg2_s <= "000" when rom_to_uc(15 downto 12) = "0100" else rom_to_uc(8 downto 6);
     branch_dest <= rom_to_uc(6 downto 0);
-    br_in_s <= ram_result_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
+    br_in_s <= ram_data_out_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
     ram_data_in_s <= br_to_mux when rom_to_uc(15 downto 12) = "0111" else "0000000000000000";
 
 
