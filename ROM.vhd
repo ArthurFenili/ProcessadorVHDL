@@ -16,10 +16,10 @@ architecture a_rom of rom is
     constant conteudo_rom : mem := (
     -- caso endereco => conteudo
     -- endereço da inst => inst de 16 bits
-    0 => "1000001001010111",
-    1 => "1000010000111111",
-    2 => "0111001010000000",
-    3 => "0101111001000000", 
+    0 => "1000001000001010", -- addi r1 10 
+    1 => "1000010000111111", -- addi r2 63
+    2 => "0111001010000000", -- sw r1 r2 (endereço 10 recebe valor 63)
+    3 => "0101111001000000", -- lw r7 r1 (reg r7 recebe o valor que está no endereço 10)
     -- abaixo: casos omissos => (zero em todos os bits)
     others => (others=>'0')
     );

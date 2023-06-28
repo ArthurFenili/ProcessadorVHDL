@@ -152,6 +152,7 @@ architecture a_processador of processador is
     signal ram_data_out_s : unsigned(15 downto 0);
     signal ram_result_s : unsigned(15 downto 0);
     signal ram_data_in_s : unsigned(15 downto 0);
+    signal endereco_ram : unsigned(6 downto 0);
     ---------------------------------------------------------
 
 begin
@@ -245,7 +246,7 @@ begin
 
     ram1: RAM port map (
         clk => clk,
-        endereco => br_to_mux(6 downto 0),
+        endereco => endereco_ram,
         wr_en => ram_wr_en_s,
         dado_in => ram_data_in_s,
         dado_out => ram_data_out_s
@@ -266,6 +267,6 @@ begin
     branch_dest <= rom_to_uc(6 downto 0);
     br_in_s <= ram_data_out_s when rom_to_uc(15 downto 12) = "0101" else ula_out_s ;
     ram_data_in_s <= br_to_mux when rom_to_uc(15 downto 12) = "0111" else "0000000000000000";
-
+    endereco_ram <= br_to_ula(6 downto 0) when rom_to_uc(15 downto 12) = "0111" else br_to_mux(6 downto 0);
 
 end architecture;
